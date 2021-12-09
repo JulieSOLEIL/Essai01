@@ -1,8 +1,5 @@
-<?php
-$page = 'entete';
-?>
 <header>
-    <h1>Vous êtes sur la page <?php echo $page; ?></h1>
+    <h1>Vous êtes sur la page <?php echo $vue; ?></h1>
     <?php
         session_start();
         if (isset($_SESSION['user'])) {
