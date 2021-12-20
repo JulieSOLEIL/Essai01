@@ -1,5 +1,5 @@
 <?php
-$vue = '';
+$vue = 'accueil';
 
 
 if (empty($_GET)){
@@ -12,21 +12,29 @@ if (empty($_GET)){
 try{
 switch ($entite) {
     case 'article':
-        require 'controleurs/controlArticle.php';
+        require 'controleurs/ControlArticle.php';
+        $controleur = new ControlArticle(); // on instancie une méthode
+        $controleur->execute($action); // et l'execute avec $action
         break;
 
     case 'user':
-        require 'controleurs/controlUser.php';
+        require 'controleurs/ControlUser.php';
+        $controleur = new ControlUser(); // on instancie une méthode
+        $controleur->execute($action); // et l'execute avec $action
         break;
 
 
     default:
-        $vue = 'accueil';
+        require 'controleurs/ControlGeneral.php';
+        $controleur = new ControlGeneral(); // on instancie une méthode
+        $controleur->execute($action); // et l'execute avec $action
         break;
 
 }
 } catch(PDOException $err){
-    $vue = 'index_error';
+    echo $err->getMessage();
+    $vue = 'erreur';
+    require 'vues/template.php';
 }
         
-require 'vues/template.php';
+

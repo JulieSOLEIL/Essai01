@@ -1,30 +1,17 @@
 <?php
-require 'base/dao.php';
+require 'base/Dao.php';
 
-function login(){
-    
-    global $vue;
-    global $erreur;
+class ModelUser {
 
-// Demande si on est en méthode 'POST', si oui, fais le code suivant...
- if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    public function login() {
 
-$login = $_POST['login'];
+        $login = $_POST['login'];
 
-    try{
-        $personne = getPersonneByLogin($login);
+        $dao = new Dao();
+        $personne = $dao->getPersonneByLogin($login);
 
         $_SESSION['user'] = $personne['nom'];
-        $vue ='accueil';
-
-        // ici je demande d'arrêter le script au-dessus
-    } catch (Exception $e) {
-        $erreur = $e->getMessage();
-        $vue ='formLogin';
+        $vue = 'accueil';
     }
-   
-} else {
 
-    $vue = 'formLogin';
-}
 }
