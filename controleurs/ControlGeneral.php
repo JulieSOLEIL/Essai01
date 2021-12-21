@@ -1,6 +1,8 @@
 <?php
 
-require_once 'controleurs/Controleur.php';
+namespace controleurs;
+
+// require_once 'controleurs/Controleur.php';
 
 class ControlGeneral extends Controleur {
 
